@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Renovatio Software — Software a la medida, web y apps con privacidad</title>
+<meta name="description" content="Renovatio Software, dirigido por Camilo Meneses, es un estudio independiente que construye software a la medida, aplicaciones web y apps móviles que respetan la privacidad, para clientes de todo el mundo." />
+<link rel="icon" type="image/svg+xml" href="../assets/renovatio_icon.svg" />
+<link rel="canonical" href="https://renovatiosoftware.net/es/" />
+<link rel="alternate" hreflang="en" href="https://renovatiosoftware.net/en/" />
+<link rel="alternate" hreflang="es" href="https://renovatiosoftware.net/es/" />
+<link rel="alternate" hreflang="x-default" href="https://renovatiosoftware.net/" />
+<meta property="og:title" content="Renovatio Software — Software a la medida, web y apps con privacidad" />
+<meta property="og:description" content="Estudio de software independiente dirigido por Camilo Meneses. Software a la medida, desarrollo web y apps móviles que respetan la privacidad — de principio a fin." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://renovatiosoftware.net/es/" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:locale:alternate" content="en_US" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://renovatiosoftware.net/#studio","name":"Renovatio Software","url":"https://renovatiosoftware.net/","logo":"https://renovatiosoftware.net/assets/renovatio_icon.svg","email":"hola@renovatiosoftware.net","description":"Estudio de software independiente que construye software a la medida, aplicaciones web y apps móviles que respetan la privacidad.","founder":{"@id":"https://renovatiosoftware.net/#camilo"}},
+{"@type":"Person","@id":"https://renovatiosoftware.net/#camilo","name":"Camilo Meneses","jobTitle":"Desarrollador de software independiente","description":"Desarrollador full-stack y fundador de Renovatio Software: software a la medida, aplicaciones web y apps móviles que respetan la privacidad.","url":"https://renovatiosoftware.net/","sameAs":["https://www.linkedin.com/in/camilo-meneses/"],"worksFor":{"@id":"https://renovatiosoftware.net/#studio"},"knowsAbout":["Desarrollo full-stack","Desarrollo web","Desarrollo de apps móviles","Flutter","React","Node.js","TypeScript"]}
+]}
+</script>
+<style>
+  @font-face{font-family:'Onest';font-style:normal;font-weight:400 800;font-display:swap;src:url(../assets/fonts/onest.woff2) format('woff2')}
+  @font-face{font-family:'Geist Mono';font-style:normal;font-weight:400 600;font-display:swap;src:url(../assets/fonts/geistmono.woff2) format('woff2')}
+  :root{
+    --ink:#0f172a;--ink-soft:#334155;--muted:#64748b;--line:#e6e8ee;--bg:#ffffff;
+    --blue:#2563eb;--orange:#f97316;--violet:#7c3aed;--radius:22px;
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 12px 30px -12px rgba(15,23,42,.12);
+    --font:'Onest',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+    --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{position:relative}
+  .eyebrow{font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(12px);background:rgba(255,255,255,.72);border-bottom:1px solid rgba(230,232,238,.7)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.06rem;letter-spacing:-.01em}
+  .brand-logo{height:34px;width:auto;display:block}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{color:var(--ink-soft);font-weight:500;font-size:.95rem}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;border-radius:999px;padding:11px 22px;border:1px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(15,23,42,.6)}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:#cbd5e1;transform:translateY(-1px)}
+  .nav .btn{padding:9px 18px;white-space:nowrap}
+  .nav-links a.cta-nav{display:inline-flex;color:#fff}
+  .lang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:3px;font-family:var(--mono);font-size:.75rem}
+  .lang a{padding:4px 9px;border-radius:999px;color:var(--muted);line-height:1}
+  .lang a:hover{color:var(--ink)}
+  .lang a.lang-on{background:var(--ink);color:#fff}
+
+  .hero{text-align:center;overflow:hidden;padding:96px 0 84px;
+    background:
+      radial-gradient(1100px 520px at 14% 8%, rgba(37,99,235,.20), transparent 60%),
+      radial-gradient(1100px 620px at 88% 4%, rgba(249,115,22,.18), transparent 62%),
+      radial-gradient(900px 500px at 50% 120%, rgba(124,58,237,.10), transparent 60%),
+      #ffffff}
+  .pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.8);border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:.86rem;color:var(--ink-soft);font-weight:500;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--orange))}
+  h1{font-size:clamp(2.2rem,5.6vw,4rem);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin:26px auto 0;max-width:16ch}
+  .hero p.lead{margin:24px auto 0;max-width:62ch;font-size:1.16rem;color:var(--ink-soft)}
+  .hero .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+  .btn-lg{padding:14px 28px;font-size:1rem}
+
+  .builtwith{padding:44px 0 8px;text-align:center}
+  .builtwith .eyebrow{color:var(--muted)}
+  .stack{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 18px;font-weight:500;font-size:.9rem;color:var(--ink-soft);font-family:var(--mono)}
+
+  .section{padding:92px 0}
+  .section-head{max-width:660px;margin:0 auto;text-align:center}
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.02em;margin-top:12px}
+  .section-head p{margin-top:16px;color:var(--ink-soft);font-size:1.08rem}
+
+  .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);position:relative;transition:transform .18s ease, box-shadow .18s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(15,23,42,.04),0 22px 46px -20px rgba(15,23,42,.22)}
+  .icon-tile{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:20px;box-shadow:0 8px 18px -8px rgba(15,23,42,.35)}
+  .icon-tile svg{width:26px;height:26px}
+  .ic-blue{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+  .ic-orange{background:linear-gradient(135deg,#fb923c,#f97316)}
+  .ic-violet{background:linear-gradient(135deg,#a78bfa,#7c3aed)}
+  .card h3{font-size:1.22rem;font-weight:750;letter-spacing:-.01em}
+  .card p{margin-top:12px;color:var(--ink-soft);font-size:1rem}
+
+  .products{background:linear-gradient(180deg,#fbfbfd,#ffffff)}
+  .product-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;margin-top:52px;display:grid;grid-template-columns:1.15fr .85fr;gap:0}
+  .product-body{padding:48px;display:flex;flex-direction:column;justify-content:center}
+  .product-head{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+  .app-icon{width:46px;height:46px;border-radius:13px;border:1px solid var(--line);flex:none}
+  .product-head h3{font-size:1.9rem;font-weight:800;letter-spacing:-.02em}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px}
+  .badge-live{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+  .badge-live .dot{width:7px;height:7px;border-radius:50%;background:#10b981}
+  .product-body p.desc{margin-top:18px;color:var(--ink-soft);font-size:1.06rem;max-width:46ch}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .tag{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:.86rem;font-weight:500;color:var(--ink-soft)}
+  .product-link{display:inline-flex;align-items:center;gap:6px;margin-top:26px;font-weight:600;font-size:.98rem;color:var(--blue)}
+  .product-link:hover{gap:9px}
+  .product-media{background:linear-gradient(160deg,#14284d,#0c1a34);display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden}
+  .product-media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .lines{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .line{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 28px;box-shadow:var(--shadow)}
+  .line .ln-top{display:flex;align-items:center;gap:12px}
+  .line .ln-ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 8px 18px -8px rgba(15,23,42,.35)}
+  .line .ln-ic svg{width:22px;height:22px}
+  .ln-gov{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+  .ln-com{background:linear-gradient(135deg,#fb923c,#ea580c)}
+  .line h3{font-size:1.15rem;font-weight:750}
+  .line p{margin-top:12px;color:var(--ink-soft);font-size:.98rem}
+  .line .ln-tag{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+  .tag-cat{color:#1d4ed8;background:#eff6ff;border-color:#bfdbfe;font-weight:600}
+  @media (max-width:760px){.lines{grid-template-columns:1fr}}
+
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:20px;text-align:center}
+  .value .vdot{width:10px;height:10px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,var(--blue),var(--orange))}
+  .value h3{font-size:1.3rem;font-weight:750}
+  .value p{margin-top:12px;color:var(--ink-soft)}
+
+  .about{background:linear-gradient(180deg,#fbfbfd,#ffffff)}
+  .about-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:44px;align-items:center;margin-top:6px}
+  .about-text h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.02em;margin-top:12px}
+  .about-text p{margin-top:18px;color:var(--ink-soft);font-size:1.07rem;max-width:58ch}
+  .about-text p .name{color:var(--ink);font-weight:700}
+  .facts{background:#fff;border:1px solid var(--line);border-radius:20px;padding:10px 26px;box-shadow:var(--shadow)}
+  .facts .frow{display:flex;flex-direction:column;gap:3px;padding:17px 0;border-bottom:1px solid var(--line)}
+  .facts .frow:last-child{border-bottom:0}
+  .facts .fk{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .facts .fv{font-weight:600;color:var(--ink);font-size:1rem}
+  .facts .fv a{color:var(--blue)}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:30px}}
+
+  .contact-panel{border-radius:32px;text-align:center;padding:72px 32px;margin-top:8px;
+    background:
+      radial-gradient(700px 340px at 20% 0%, rgba(37,99,235,.16), transparent 62%),
+      radial-gradient(700px 360px at 82% 15%, rgba(249,115,22,.16), transparent 60%),
+      #f8fafc;
+    border:1px solid var(--line)}
+  .contact-panel h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;letter-spacing:-.02em}
+  .contact-panel p{margin:16px auto 0;max-width:54ch;color:var(--ink-soft);font-size:1.1rem}
+  .contact-panel .btn{margin-top:30px}
+
+  footer{border-top:1px solid var(--line);padding:34px 0}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
+  .foot-inner .brand-sm{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--ink-soft)}
+  .foot-inner a{color:var(--ink-soft);font-weight:500}
+  .foot-inner a:hover{color:var(--ink)}
+
+  @media (max-width:900px){
+    .cards-3{grid-template-columns:1fr}
+    .product-card{grid-template-columns:1fr}
+    .product-media{min-height:380px;order:2}
+    .values{grid-template-columns:1fr;gap:34px}
+  }
+  @media (max-width:720px){
+    .nav-links > a:not(.cta-nav){display:none}
+    .nav-links{gap:14px}
+    .hero{padding:72px 0 60px}
+    .section{padding:68px 0}
+    .product-body{padding:30px}
+  }
+  @media (max-width:480px){
+    .wrap{padding:0 16px}
+    .nav-links{gap:8px}
+    .brand-logo{height:26px}
+    .nav .btn{padding:7px 11px;font-size:.78rem}
+    .lang{font-size:.66rem;padding:2px}
+    .lang a{padding:4px 6px}
+    .contact-panel{padding:48px 18px}
+    .contact-panel .btn{font-size:.82rem;padding:12px 16px;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Inicio de Renovatio Software">
+      <img class="brand-logo" src="../assets/renovatio_horizontal_claro.svg" alt="Renovatio Software" />
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Servicios</a>
+      <a href="#products">Productos</a>
+      <a href="#about">Nosotros</a>
+      <a href="#approach">Enfoque</a>
+      <span class="lang" aria-label="Idioma">
+        <a href="../en/">EN</a>
+        <a class="lang-on" href="./" aria-current="page">ES</a>
+      </span>
+      <a class="btn btn-dark cta-nav" href="mailto:proyectos@renovatiosoftware.net">Inicia un proyecto</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="pill"><span class="dot" aria-hidden="true"></span> Estudio de software independiente · Clientes en EE. UU. y Europa</span>
+    <h1>Software a la medida, web y apps que respetan tu privacidad — de principio a fin.</h1>
+    <p class="lead">Renovatio Software, dirigido por Camilo Meneses, acompaña a clientes de todo el mundo en software a la medida y desarrollo web — y publica sus propias apps móviles offline-first que respetan la privacidad.</p>
+    <div class="actions">
+      <a class="btn btn-dark btn-lg" href="mailto:proyectos@renovatiosoftware.net">Hablemos</a>
+      <a class="btn btn-ghost btn-lg" href="#products">Ver trabajo ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BUILT WITH ===================== -->
+<section class="builtwith">
+  <div class="wrap">
+    <div class="eyebrow">Construido con</div>
+    <div class="stack">
+      <span class="chip">React</span>
+      <span class="chip">Next.js</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">Python</span>
+      <span class="chip">Flutter</span>
+      <span class="chip">Android</span>
+      <span class="chip">Kotlin</span>
+      <span class="chip">REST APIs</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">SQLite</span>
+      <span class="chip">Cloudflare</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--blue)">Servicios</div>
+      <h2>Lo que construimos para clientes</h2>
+      <p>Entrega de principio a fin — de la primera conversación a producción — con un solo desarrollador senior que se hace cargo de todo.</p>
+    </div>
+    <div class="cards-3">
+      <article class="card">
+        <div class="icon-tile ic-blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Software a la medida</h3>
+        <p>Aplicaciones y herramientas internas hechas a la medida de cómo realmente trabaja tu negocio — diseñadas, construidas y mantenidas de principio a fin.</p>
+      </article>
+      <article class="card">
+        <div class="icon-tile ic-orange" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Desarrollo web</h3>
+        <p>Sitios y aplicaciones web rápidos y modernos — arquitectura limpia, buena experiencia de usuario y código sobre el que puedes construir por años.</p>
+      </article>
+      <article class="card">
+        <div class="icon-tile ic-violet" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        </div>
+        <h3>Apps móviles y productos con privacidad</h3>
+        <p>Apps para iOS y Android construidas offline-first, con tus datos en tu propio dispositivo — el mismo estándar de nuestros propios productos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUCTS ===================== -->
+<section class="section products" id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--orange)">Productos</div>
+      <h2>Nuestros productos</h2>
+      <p>Dos líneas de producto, un estándar — ambas respetan la privacidad y se construyen de principio a fin.</p>
+    </div>
+
+    <div class="lines">
+      <div class="line">
+        <div class="ln-top">
+          <span class="ln-ic ln-gov" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 3 9 21 9"/><line x1="4" y1="21" x2="20" y2="21"/><line x1="6" y1="21" x2="6" y2="10"/><line x1="10" y1="21" x2="10" y2="10"/><line x1="14" y1="21" x2="14" y2="10"/><line x1="18" y1="21" x2="18" y2="10"/></svg></span>
+          <h3>Gobierno Abierto</h3>
+        </div>
+        <p>Herramientas que convierten los datos públicos de Colombia en algo útil y transparente para todos — gratis y sostenidas solo con publicidad no invasiva, como servicio a la comunidad.</p>
+        <span class="ln-tag">Ejemplo: ProPonte</span>
+      </div>
+      <div class="line">
+        <div class="ln-top">
+          <span class="ln-ic ln-com" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+          <h3>Comercial y especializado</h3>
+        </div>
+        <p>Apps enfocadas para profesiones, sectores y aficiones — herramientas prácticas para necesidades especializadas, como la interventoría de contratos.</p>
+        <span class="ln-tag">En desarrollo</span>
+      </div>
+    </div>
+
+    <article class="product-card">
+      <div class="product-body">
+        <div class="product-head">
+          <img class="app-icon" src="../assets/proponte-icon.png" alt="Ícono de la app ProPonte" />
+          <h3>ProPonte</h3>
+          <span class="badge badge-live"><span class="dot" aria-hidden="true"></span> En vivo — prueba cerrada</span>
+        </div>
+        <p class="desc">Un rastreador de oportunidades de contratación pública para empresas colombianas. ProPonte monitorea el SECOP — el sistema oficial de contratación de Colombia (SECOP I y II) — y te muestra las convocatorias y procesos que coinciden con tu empresa.</p>
+        <p class="desc">Offline-first por diseño: el perfil de tu empresa — sector (UNSPSC), región y rango de valor — se guarda y filtra en tu propio dispositivo, y recibes un aviso apenas se publica una oportunidad que coincide. Gratis, con publicidad e independiente de cualquier entidad del Estado.</p>
+        <div class="tags">
+          <span class="tag tag-cat">Gobierno Abierto</span>
+          <span class="tag">Android</span>
+          <span class="tag">Google Play</span>
+          <span class="tag">Gratis · con anuncios</span>
+          <span class="tag">SECOP</span>
+        </div>
+        <a class="product-link" href="../proponte/">Ver sitio de ProPonte →</a>
+      </div>
+      <div class="product-media">
+        <img src="../assets/proponte-mockup.jpg" alt="La app ProPonte mostrando un feed de oportunidades de contratación pública del SECOP" loading="lazy" />
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== APPROACH ===================== -->
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="values">
+      <div class="value">
+        <div class="vdot" aria-hidden="true"></div>
+        <h3>Colaboración directa</h3>
+        <p>Trabajas con la persona que escribe el código. Sin intermediarios ni teléfono roto — las decisiones se toman en una sola conversación.</p>
+      </div>
+      <div class="value">
+        <div class="vdot" aria-hidden="true"></div>
+        <h3>Privacidad por defecto</h3>
+        <p>Sin recolección ni reventa de datos. Nuestras apps son la prueba: varias son totalmente offline-first y mantienen tus datos en tu dispositivo.</p>
+      </div>
+      <div class="value">
+        <div class="vdot" aria-hidden="true"></div>
+        <h3>Hecho para durar</h3>
+        <p>Sistemas pequeños y bien hechos antes que enormes y desordenados. Publicamos software que estamos felices de mantener por años.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="eyebrow" style="color:var(--blue)">Nosotros</div>
+        <h2>Un solo desarrollador, de principio a fin.</h2>
+        <p>Renovatio Software es el estudio independiente de <span class="name"><a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span>, desarrollador full-stack radicado en Colombia que trabaja con clientes de todo el mundo. Llevo los productos de la idea a producción — arquitectura, backend, frontend web y móvil, y despliegue — para que tengas un desarrollo coherente a cargo de una sola persona, no repartido entre equipos.</p>
+        <p>También diseño, construyo y publico mis propias apps que respetan la privacidad, lo que me mantiene en todo el ciclo: desde el primer commit hasta la tienda, el soporte y el mantenimiento a largo plazo. Ese mismo estándar va en cada proyecto de cliente. Por ahora las apps se publican a nombre del desarrollador Camilo Meneses mientras la marca Renovatio Software toma forma.</p>
+      </div>
+      <aside class="facts">
+        <div class="frow"><span class="fk">Ubicación</span><span class="fv">Colombia · trabajo remoto global</span></div>
+        <div class="frow"><span class="fk">Enfoque</span><span class="fv">Full-stack — web · móvil · backend</span></div>
+        <div class="frow"><span class="fk">Método</span><span class="fv">De principio a fin · privacidad primero</span></div>
+        <div class="frow"><span class="fk">Escríbenos</span><span class="fv"><a href="mailto:hola@renovatiosoftware.net">hola@renovatiosoftware.net</a></span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section" id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact-panel">
+      <h2>¿Tienes un proyecto en mente?</h2>
+      <p>Cuéntanos qué estás construyendo — software a la medida, una aplicación web o un producto móvil. Respondemos cada mensaje.</p>
+      <a class="btn btn-dark btn-lg" href="mailto:contacto@renovatiosoftware.net">contacto@renovatiosoftware.net →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap foot-inner">
+    <span class="brand-sm"><img src="../assets/renovatio_icon.svg" alt="" style="height:18px;width:18px;display:block" />© 2026 Renovatio Software · por <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span>
+    <a href="privacidad/">Privacidad</a>
+    <span>Hecho en Colombia · Construyendo para el mundo</span>
+  </div>
+</footer>
+
+</body>
+</html>

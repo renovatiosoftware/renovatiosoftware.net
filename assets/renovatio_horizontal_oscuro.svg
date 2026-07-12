@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="34.475765mm"
+   height="10.888838mm"
+   viewBox="0 0 34.475765 10.888838"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-58.695334,-144.76516)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:5.23663px;font-family:Onest;-inkscape-font-specification:'Onest Semi-Bold';letter-spacing:-0.338987px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;fill:#28220b;stroke-width:0;stroke-dasharray:none"
+       x="70.930458"
+       y="147.77174"
+       id="text1-0-4"><tspan
+         id="tspan1-3-7"
+         style="letter-spacing:-0.338987px;fill:#ffffff;stroke-width:0"
+         x="70.930458"
+         y="147.77174"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Onest;-inkscape-font-specification:'Onest Bold';letter-spacing:-0.338987px;fill:#ffffff;stroke-width:0"
+           id="tspan2-6-6"
+           dx="0"
+           dy="2.2265911">Renovatio</tspan></tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Onest;-inkscape-font-specification:'Onest Bold';letter-spacing:-0.338987px;fill:#0000ff;stroke-width:0"
+         x="70.930458"
+         y="154.31754"
+         id="tspan11-1-5">Software</tspan></text>
+    <g
+       id="g10-0-6"
+       transform="matrix(1.319603,0,0,1.319603,-26.072564,4.5745875)">
+      <path
+         id="rect4-6-9"
+         style="fill:#ffff00;stroke-width:0;stroke-dasharray:none"
+         d="m 72.42297,110.63511 c -0.140377,2.13821 -1.919052,3.82922 -4.092774,3.82922 -1.105664,0 4.092774,0.0242 4.092774,0.0242 z" />
+      <path
+         id="path8-3-3"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0;stroke-dasharray:none"
+         d="m 64.237423,106.23693 v 3.85247 c 0.140372,-2.13821 1.919045,-3.8287 4.092773,-3.8287 2.173805,0 3.952516,1.6909 4.092774,3.82922 v -3.85299 z" />
+      <path
+         id="path4-3-2-7"
+         style="fill:#0000ff;stroke-width:0"
+         d="m 68.381229,106.50804 c -2.101447,0 -3.804841,1.70339 -3.804843,3.80484 0,1.07577 -0.02293,0.0288 0.0082,3.82599 3.779906,0.004 2.771339,-0.0207 3.797011,-0.0207 2.101446,0 3.804845,-1.70379 3.804843,-3.80524 2e-6,-2.10145 -1.703789,-3.80484 -3.805234,-3.80484 z m -0.07245,2.11624 a 1.7380618,1.7380618 0 0 1 1.737947,1.73794 1.7380618,1.7380618 0 0 1 -1.737947,1.73834 1.7380618,1.7380618 0 0 1 -1.737947,-1.73834 1.7380618,1.7380618 0 0 1 1.737947,-1.73794 z" />
+    </g>
+  </g>
+</svg>
