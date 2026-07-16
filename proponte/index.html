@@ -152,6 +152,50 @@
   footer a{color:var(--soft)}footer a:hover{color:var(--brand-2)}
   a:focus-visible{outline:2px solid #7aa0ff;outline-offset:3px;border-radius:6px}
 
+  /* ---------- marco de teléfono reutilizable ---------- */
+  .device{border-radius:26px;box-shadow:0 30px 62px -26px rgba(0,0,0,.7);line-height:0}
+  .device img{display:block;width:100%;height:auto;border-radius:26px}
+
+  /* ---------- showcase: slider coverflow ---------- */
+  .show{position:relative;color:#fff;overflow:hidden;margin-top:14px;
+    background:
+      radial-gradient(900px 520px at 85% 4%, rgba(42,85,230,.5), transparent 60%),
+      radial-gradient(600px 420px at 6% 100%, rgba(245,197,24,.08), transparent 60%),
+      linear-gradient(165deg,#0A1533 0%,#0C2264 55%,#0A1737 100%)}
+  .show .shead{max-width:1180px;margin:0 auto;padding:72px 32px 4px;text-align:center}
+  .show .k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9fb4ff;font-weight:500;margin:0 0 12px}
+  .show h2{font-size:clamp(26px,3.6vw,38px);line-height:1.1;letter-spacing:-.03em;font-weight:800;margin:0;color:#fff}
+
+  .slider{position:relative;max-width:1320px;margin:0 auto}
+  .viewport{overflow:hidden;padding:34px 0 8px;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
+  .track{display:flex;align-items:center;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform}
+  .slide{flex:0 0 auto;width:230px;margin:0 15px;opacity:.45;transition:opacity .55s,filter .55s}
+  .slide .device{transform:scale(.8) translateY(var(--py,0));transition:transform .55s}
+  .slide.on{opacity:1}
+  .slide.on .device{transform:scale(1) translateY(var(--py,0))}
+  .slide:not(.on){filter:saturate(.85) blur(1.4px)}
+  .slider .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;padding:0;flex:0 0 auto;box-sizing:border-box;border-radius:50%;
+    border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font-size:20px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
+  .slider .nav:hover{background:rgba(255,255,255,.2)}
+  .slider .prev{left:14px}.slider .next{right:14px}
+  .caps{position:relative;height:104px;max-width:600px;margin:2px auto 0;padding:0 24px}
+  .cap{position:absolute;left:24px;right:24px;top:0;opacity:0;transform:translateY(12px);
+    transition:opacity .5s,transform .5s;pointer-events:none;text-align:center}
+  .cap.on{opacity:1;transform:none}
+  .cap b{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#9fb4ff;font-weight:500;margin:0 0 9px}
+  .cap span{font-size:clamp(17px,2.3vw,22px);line-height:1.3;font-weight:750;color:#fff}
+  .dots{display:flex;gap:9px;justify-content:center;margin-top:2px;padding-bottom:64px}
+  .dots button{width:8px;height:8px;border-radius:99px;border:0;background:rgba(255,255,255,.3);cursor:pointer;padding:0;transition:background .2s,width .2s}
+  .dots button.on{background:#fff;width:24px}
+
+  /* teléfono destacado en el CTA final */
+  .fbox.two{display:grid;grid-template-columns:1.06fr .94fr;gap:20px 34px;align-items:center;text-align:left}
+  .fbox.two .ftxt{position:relative;z-index:2}
+  .fbox.two .ph{position:relative;z-index:2;justify-self:center;width:212px}
+
   @media (max-width:900px){
     .hwrap{grid-template-columns:1fr;gap:20px;padding-bottom:56px;text-align:center}
     .eyebrow,.cta{justify-content:center}.lead{margin-left:auto;margin-right:auto}
@@ -159,6 +203,11 @@
     .cc{position:static;transform:none!important;opacity:1!important;width:100%;max-width:340px}
     .c1,.c2{display:none}
     .steps{grid-template-columns:1fr;max-width:440px}
+    .fbox.two{grid-template-columns:1fr;text-align:center;gap:26px}
+    .fbox.two .ph{width:198px}
+    .slide{width:208px;margin:0 11px}
+    .slider .nav{width:42px;height:42px}
+    .slider .prev{left:4px}.slider .next{right:4px}
   }
   @media (max-width:520px){.nav,.hwrap,.band,.steps,.article,.faq,.final,footer .in{padding-left:20px;padding-right:20px}.nav .lg b{display:none}}
 </style>
@@ -222,6 +271,49 @@
     <article class="step"><div class="n">3</div><h3>Recibe avisos</h3><p>Te avisamos cuando se publica una convocatoria que coincide contigo. Tú decides a cuáles postularte en el SECOP.</p></article>
   </section>
 
+  <section class="show" id="pantallas" aria-label="Pantallas de la app ProPonte">
+    <div class="shead">
+      <p class="k">Míralo por dentro</p>
+      <h2>Así se ve ProPonte en tu celular.</h2>
+    </div>
+    <div class="slider" data-slider>
+      <button class="nav prev" type="button" aria-label="Pantalla anterior">&#8249;</button>
+      <div class="viewport">
+        <div class="track">
+          <figure class="slide"><div class="device"><img src="screens/s1.webp" width="560" height="1195" loading="lazy" alt="Feed de oportunidades del SECOP filtradas a tu perfil"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s2.webp" width="560" height="1195" loading="lazy" alt="Alertas de nuevas convocatorias del SECOP"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s3.webp" width="560" height="1195" loading="lazy" alt="Análisis de una entidad contratante en ProPonte"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s4.webp" width="560" height="1195" loading="lazy" alt="Detalle de una convocatoria con valor y fecha de cierre"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s5.webp" width="560" height="1195" loading="lazy" alt="Entidades del Estado que sigues en ProPonte"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s6.webp" width="560" height="1195" loading="lazy" alt="Ficha pública de una entidad contratante"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s7.webp" width="560" height="1195" loading="lazy" alt="Convocatorias guardadas para revisar después"></div></figure>
+          <figure class="slide"><div class="device"><img src="screens/s8.webp" width="560" height="1195" loading="lazy" alt="Novedades de los procesos que sigues"></div></figure>
+        </div>
+      </div>
+      <button class="nav next" type="button" aria-label="Pantalla siguiente">&#8250;</button>
+    </div>
+    <div class="caps" aria-live="polite">
+      <p class="cap"><b>Feed</b><span>Todas las oportunidades del SECOP, filtradas para ti</span></p>
+      <p class="cap"><b>Alertas</b><span>Entérate al instante de cada nueva convocatoria</span></p>
+      <p class="cap"><b>Análisis</b><span>Analiza a cada entidad antes de proponer</span></p>
+      <p class="cap"><b>Cierres</b><span>No te pierdas los procesos que están por cerrar</span></p>
+      <p class="cap"><b>Seguimiento</b><span>Sigue a las entidades que te interesan</span></p>
+      <p class="cap"><b>Entidad</b><span>Consulta la ficha pública de cada contratante</span></p>
+      <p class="cap"><b>Guardadas</b><span>Guarda las convocatorias que quieres revisar después</span></p>
+      <p class="cap"><b>Novedades</b><span>Recibe las novedades de tus procesos seguidos</span></p>
+    </div>
+    <div class="dots" role="tablist" aria-label="Ir a una pantalla">
+      <button type="button" aria-label="Pantalla 1"></button>
+      <button type="button" aria-label="Pantalla 2"></button>
+      <button type="button" aria-label="Pantalla 3"></button>
+      <button type="button" aria-label="Pantalla 4"></button>
+      <button type="button" aria-label="Pantalla 5"></button>
+      <button type="button" aria-label="Pantalla 6"></button>
+      <button type="button" aria-label="Pantalla 7"></button>
+      <button type="button" aria-label="Pantalla 8"></button>
+    </div>
+  </section>
+
   <section class="band" id="guia">
     <p class="k">Guía rápida</p>
     <h2>Cómo buscar y consultar convocatorias en el SECOP</h2>
@@ -259,16 +351,83 @@
   </div>
 
   <section class="final">
-    <div class="fbox">
-      <h2>Tu próxima oportunidad ya está en el SECOP.</h2>
-      <p>Descarga ProPonte gratis y empieza a seguir convocatorias hoy.</p>
-      <a class="play" href="https://play.google.com/store/apps/details?id=co.renovatiosoftware.proponte" rel="noopener">
-        <img src="gplay.svg" alt=""><span class="pl"><small>Descárgalo en</small><b>Google Play</b></span>
-      </a>
+    <div class="fbox two">
+      <div class="ftxt">
+        <h2>Tu próxima oportunidad ya está en el SECOP.</h2>
+        <p>Descarga ProPonte gratis y empieza a seguir convocatorias hoy.</p>
+        <a class="play" href="https://play.google.com/store/apps/details?id=co.renovatiosoftware.proponte" rel="noopener">
+          <img src="gplay.svg" alt=""><span class="pl"><small>Descárgalo en</small><b>Google Play</b></span>
+        </a>
+      </div>
+      <div class="ph"><div class="device"><img src="screens/s1.webp" width="560" height="1195" loading="lazy" alt="Feed de ProPonte con oportunidades del SECOP filtradas a tu empresa"></div></div>
     </div>
   </section>
 </main>
 
 <footer><div class="in"><span>Un producto de <a href="../" style="display:inline-flex;align-items:center;gap:5px;vertical-align:middle"><img src="../assets/renovatio_icon.svg" alt="" style="height:15px;width:15px;display:block" />Renovatio Software</a></span><span>·</span><span>© 2026 <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span><span>·</span><a href="mailto:soporte@renovatiosoftware.net">soporte@renovatiosoftware.net</a><span>·</span><span>Hecho en Colombia</span></div></footer>
+
+<script>
+(function(){
+  var root=document.querySelector('[data-slider]');
+  if(!root) return;
+  var vp=root.querySelector('.viewport');
+  var track=root.querySelector('.track');
+  var slides=[].slice.call(root.querySelectorAll('.slide'));
+  var caps=[].slice.call(document.querySelectorAll('.caps .cap'));
+  var dots=[].slice.call(document.querySelectorAll('.dots button'));
+  var i=0, n=slides.length, timer=null;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function render(){
+    var s=slides[i];
+    var off=vp.clientWidth/2-(s.offsetLeft+s.offsetWidth/2);
+    track.style.transform='translateX('+off+'px)';
+    for(var x=0;x<n;x++){
+      slides[x].classList.toggle('on',x===i);
+      if(caps[x]) caps[x].classList.toggle('on',x===i);
+      if(dots[x]){dots[x].classList.toggle('on',x===i);dots[x].setAttribute('aria-selected',x===i?'true':'false');}
+    }
+  }
+  function go(k){ i=(k%n+n)%n; render(); }
+  function next(){ go(i+1); } function prev(){ go(i-1); }
+  function play(){ if(reduce) return; timer=window.setInterval(next,4200); }
+  function reset(){ if(timer) clearInterval(timer); play(); }
+
+  root.querySelector('.next').addEventListener('click',function(){ next(); reset(); });
+  root.querySelector('.prev').addEventListener('click',function(){ prev(); reset(); });
+  dots.forEach(function(d,x){ d.addEventListener('click',function(){ go(x); reset(); }); });
+  slides.forEach(function(s,x){ s.addEventListener('click',function(){ if(x!==i){ go(x); reset(); } }); });
+
+  var x0=null;
+  root.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+  root.addEventListener('touchend',function(e){
+    if(x0===null) return;
+    var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>40){ dx<0?next():prev(); reset(); }
+    x0=null;
+  },{passive:true});
+
+  root.addEventListener('mouseenter',function(){ if(timer) clearInterval(timer); });
+  root.addEventListener('mouseleave',reset);
+  var t;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(render,120); });
+
+  render(); play();
+
+  if(!reduce){
+    var show=document.querySelector('.show');
+    var tick=false;
+    window.addEventListener('scroll',function(){
+      if(tick) return; tick=true;
+      window.requestAnimationFrame(function(){
+        var r=show.getBoundingClientRect();
+        var p=(window.innerHeight-r.top)/(window.innerHeight+r.height);
+        track.style.setProperty('--py',((p-0.5)*-28).toFixed(1)+'px');
+        tick=false;
+      });
+    },{passive:true});
+  }
+})();
+</script>
 </body>
 </html>
