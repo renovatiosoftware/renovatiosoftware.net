@@ -58,7 +58,7 @@
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:400;-webkit-font-smoothing:antialiased}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
   .wrap{max-width:1220px;margin:0 auto;padding:0 40px}
 
   /* label + heading primitives */
@@ -444,6 +444,13 @@
 <footer><div class="in"><span>A product of <a href="../" style="display:inline-flex;align-items:center;gap:5px;vertical-align:middle"><img src="../assets/renovatio_icon.svg" alt="" style="height:14px;width:14px;display:block" />Renovatio Software</a></span><span>·</span><span>© 2026 <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span><span>·</span><a href="mailto:support@renovatiosoftware.net">support@renovatiosoftware.net</a><span>·</span><span>Made in Colombia</span></div></footer>
 
 <div class="lb" id="lightbox" aria-hidden="true"><button class="x" aria-label="Close">✕</button><img alt="Zoomed screenshot"></div>
+
+<script>
+(function(){
+  document.addEventListener('contextmenu',function(e){ if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.addEventListener('dragstart',function(e){ if(e.target.tagName==='IMG') e.preventDefault(); });
+})();
+</script>
 
 <script>
 (function(){
