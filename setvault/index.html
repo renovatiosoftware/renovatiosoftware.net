@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Setvault — Your coin album, private and offline</title>
+<meta name="description" content="Setvault is a private, offline album for your coin collection. Photograph your own coins, fill classic series with accurate mintage facts, and keep everything encrypted on your device — no cloud, no account, no ads.">
+<link rel="canonical" href="https://renovatiosoftware.net/setvault/">
+<meta name="keywords" content="coin collection app, coin album app, coin collecting app, coin collection tracker, offline coin app, private coin collection, Lincoln cent album, coin inventory app, numismatics app, encrypted coin collection">
+<meta name="theme-color" content="#2A0A10">
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Setvault">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://renovatiosoftware.net/setvault/">
+<meta property="og:title" content="Setvault — Your coin album, private and offline">
+<meta property="og:description" content="A private, offline album for your coin collection. Photograph your own coins, complete classic series with accurate facts, and keep it all encrypted on your device.">
+<meta property="og:image" content="https://renovatiosoftware.net/setvault/logo-hero.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Setvault — Your coin album, private and offline">
+<meta name="twitter:description" content="A private, offline album for your coin collection. Your own photos, accurate facts, encrypted on your device.">
+<meta name="twitter:image" content="https://renovatiosoftware.net/setvault/logo-hero.png">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Person","@id":"https://renovatiosoftware.net/setvault/#dev","name":"Camilo Meneses","url":"https://renovatiosoftware.net/setvault/","image":"https://renovatiosoftware.net/setvault/logo.png","email":"contact@renovatiosoftware.net"},
+{"@type":"MobileApplication","name":"Setvault","operatingSystem":"Android","applicationCategory":"LifestyleApplication","url":"https://renovatiosoftware.net/setvault/","image":"https://renovatiosoftware.net/setvault/logo.png","inLanguage":"en","description":"A private, offline album for your coin collection. Photograph your own coins, complete classic series with accurate mintage facts, and keep everything encrypted on your device.","publisher":{"@id":"https://renovatiosoftware.net/setvault/#dev"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to download. One-time $19.99 in-app unlock for Pro. No subscription."}}
+]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Setvault free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Setvault is free for your first album, with unlimited coins inside it. A single one-time payment of $19.99 unlocks Pro: unlimited albums, every binding and theme, statistics and advanced export. There is no subscription and there are no ads."}},
+{"@type":"Question","name":"Does Setvault use the cloud?","acceptedAnswer":{"@type":"Answer","text":"No. Everything is stored encrypted on your device (SQLCipher). There is no account, no cloud and no analytics. You back up your collection to a single .setvault file that you keep wherever you trust."}},
+{"@type":"Question","name":"Can Setvault identify a coin from a photo?","acceptedAnswer":{"@type":"Answer","text":"No, and that is on purpose. Your photo is a record of the coin you own, not an AI guess. You choose the slot in the album; Setvault provides the historical facts."}},
+{"@type":"Question","name":"Where do the coin facts come from?","acceptedAnswer":{"@type":"Answer","text":"From public-domain sources such as the U.S. Mint, cross-checked against independent references. Facts are not copyrightable, and we never invent mintages or specifications."}},
+{"@type":"Question","name":"Which coins are included?","acceptedAnswer":{"@type":"Answer","text":"Setvault starts with United States series such as the Lincoln Wheat Cent (1909–1958), Jefferson Nickel, Mercury Dime and the 50 State Quarters, with more on the way."}},
+{"@type":"Question","name":"What happens to my collection if I lose my phone?","acceptedAnswer":{"@type":"Answer","text":"You export an encrypted .setvault backup file and keep it wherever you like. Importing it restores everything, photos included. Basic export is always free — we never hold your data hostage."}}
+]}
+</script>
+
+<link rel="preload" href="fonts/playfair-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/spectral-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+
+<style>
+  :root{
+    --paper:#FBF8F2; --surface:#FFFFFF; --ink:#1B1310; --ink-2:#584743; --soft:#9A8A82;
+    --burg:#591521; --burg-2:#3E0E17; --burg-ink:#240910;
+    --gold:#B48A34; --gold-2:#D8B463; --line:#E7DDCE;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+    --disp:'Playfair Display',Georgia,'Times New Roman',serif;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:400;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 40px}
+
+  /* label + heading primitives */
+  .lab{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:0}
+  .disc{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding-bottom:5px;border-bottom:1px solid var(--gold)}
+  .disc:hover{color:var(--gold)}
+  .disc.lt{color:#F3E9D6;border-color:var(--gold-2)}.disc.lt:hover{color:#fff}
+
+  /* MOCKUP image slots */
+  .mock{position:relative;background:
+      repeating-linear-gradient(135deg,#F1E9DB,#F1E9DB 22px,#EDE4D3 22px,#EDE4D3 44px);
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .mock .ml{font-family:var(--mono);font-size:12px;letter-spacing:.03em;line-height:1.7;color:var(--soft);padding:24px;max-width:80%}
+  .mock .ml b{display:block;color:var(--burg);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+  .mock .ml span{display:block;margin-top:8px;font-size:11px;color:#B2A498}
+  .mock::after{content:"MOCKUP";position:absolute;top:0;left:0;font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:#fff;background:var(--burg);padding:4px 9px}
+  .mock.dark{background:linear-gradient(160deg,#2A0A10,#4E1020 55%,#210810);border:none}
+  .mock.dark .ml{color:#C9A9AE}.mock.dark .ml b{color:var(--gold-2)}.mock.dark .ml span{color:#9A7078}
+
+  /* ---------- top nav ---------- */
+  header.site{position:relative;z-index:5;border-bottom:1px solid var(--line);background:var(--paper)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px}
+  .nav .lg{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .nav .lg img{height:40px;width:40px}
+  .nav .lg b{font-family:var(--disp);font-size:22px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+  .nav .links{display:flex;gap:30px;align-items:center}
+  .nav .links a{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);text-decoration:none}
+  .nav .links a:hover{color:var(--gold)}
+
+  /* ---------- HERO full-bleed ---------- */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;
+    background:
+      linear-gradient(95deg,rgba(16,3,7,.80) 0%,rgba(16,3,7,.58) 34%,rgba(16,3,7,.20) 58%,rgba(16,3,7,0) 78%),
+      linear-gradient(180deg,rgba(16,3,7,.10) 0%,rgba(16,3,7,.22) 55%,rgba(16,3,7,.62) 100%),
+      url(img/hero.jpg);
+    background-size:cover;background-position:50% 46%}
+  .hero .hin{position:relative;z-index:2;width:100%;max-width:1220px;margin:0 auto;padding:0 40px 82px}
+  .hero .lab{color:var(--gold-2);margin:0 0 22px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+  .hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(40px,6.4vw,76px);line-height:1.04;letter-spacing:-.01em;margin:0;max-width:16ch;text-shadow:0 2px 22px rgba(0,0,0,.5)}
+  .hero h1 em{font-style:italic;color:var(--gold-2)}
+  .hero p{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#F1E7D8;max-width:44ch;margin:26px 0 0;font-weight:400;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+  .hero .row{margin-top:34px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+  .soon{display:inline-flex;align-items:center;gap:13px;border:1px solid rgba(216,180,99,.5);padding:12px 22px 12px 16px;border-radius:2px;text-decoration:none;color:#fff}
+  .soon img{width:26px;height:26px;opacity:.9}
+  .soon .pl{display:flex;flex-direction:column;line-height:1.1;text-align:left}
+  .soon .pl small{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2)}
+  .soon .pl b{font-size:16px;font-weight:500;font-family:var(--serif)}
+
+  /* ---------- editorial rows ---------- */
+  .ed{padding:clamp(70px,10vw,132px) 0}
+  .ed .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,84px);align-items:center}
+  .ed.rev .grid{direction:rtl}.ed.rev .grid>*{direction:ltr}
+  .ed .txt .lab{margin-bottom:22px}
+  .ed .txt h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,4vw,46px);line-height:1.1;letter-spacing:-.01em;margin:0 0 20px;color:var(--ink)}
+  .ed .txt p{font-size:17.5px;line-height:1.8;color:var(--ink-2);margin:0 0 26px;font-weight:400;max-width:42ch}
+  .ed .shot{aspect-ratio:4/5;overflow:hidden;border-radius:3px}
+  .ed .shot img{width:100%;height:100%;object-fit:cover;display:block}
+  .ed .appshot{max-width:350px;margin:0 auto;border-radius:4px;overflow:hidden}
+  .ed .appshot img{width:100%;height:auto;display:block}
+  .ed .phone{aspect-ratio:9/16;max-width:340px;margin:0 auto}
+
+  /* ---------- flow (adding a coin) ---------- */
+  .flow{padding:clamp(56px,8vw,100px) 0 clamp(64px,9vw,104px)}
+  .flow .head{text-align:center;margin-bottom:clamp(34px,5vw,50px)}
+  .flow .head .lab{margin:0 0 16px}
+  .flow .head h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,3.8vw,44px);letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .flow .head p{font-size:16px;color:var(--ink-2);max-width:52ch;margin:16px auto 0;line-height:1.6}
+  .carousel{display:flex;align-items:center;justify-content:center;gap:18px;max-width:640px;margin:0 auto;padding:0 20px}
+  .track{position:relative;width:100%;max-width:362px;flex:0 1 362px}
+  .track img{position:absolute;top:0;left:0;width:100%;height:auto;display:block;opacity:0;transition:opacity .45s ease;border-radius:10px;pointer-events:none}
+  .track img:first-child{position:relative}
+  .track img.on{opacity:1;pointer-events:auto}
+  .cnav{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--serif);font-size:24px;line-height:1;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+  .cnav:hover{border-color:var(--gold);color:var(--gold)}
+  .cnav:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .cmeta{text-align:center;margin-top:28px;min-height:74px}
+  .cname{font-family:var(--disp);font-size:22px;font-weight:500;color:var(--ink);margin:0 0 8px}
+  .cdesc{font-size:15.5px;color:var(--ink-2);margin:0 auto;max-width:46ch;line-height:1.6}
+  .dots{display:flex;gap:11px;justify-content:center;margin-top:24px}
+  .dots button{width:9px;height:9px;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+  .dots button.on{background:var(--gold);transform:scale(1.3)}
+  .dots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  /* ---------- statement (dark, full-bleed) ---------- */
+  .statement{background:linear-gradient(160deg,#211C18,#14100E 55%,#0B0906);color:#F5EAD8;text-align:center;padding:clamp(84px,12vw,150px) 40px;position:relative}
+  .statement .rule{width:46px;height:1px;background:var(--gold);margin:0 auto 34px}
+  .statement blockquote{font-family:var(--disp);font-weight:400;font-style:italic;font-size:clamp(26px,4vw,44px);line-height:1.25;letter-spacing:-.01em;margin:0 auto;max-width:20ch}
+  .statement p{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2);margin:30px 0 0}
+
+  /* ---------- values (minimal columns) ---------- */
+  .values{padding:clamp(70px,10vw,120px) 0}
+  .values .head{text-align:center;margin-bottom:64px}
+  .values .head .lab{margin:0 0 16px}
+  .values .head h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,3.8vw,44px);letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .vitem{background:var(--paper);padding:40px 34px}
+  .vitem .n{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em;margin:0 0 18px}
+  .vitem h3{font-family:var(--disp);font-weight:500;font-size:21px;letter-spacing:-.005em;color:var(--ink);margin:0 0 10px}
+  .vitem p{font-size:15px;line-height:1.7;color:var(--ink-2);margin:0}
+
+  /* ---------- bindings ---------- */
+  .bindings{padding:clamp(64px,9vw,112px) 0}
+  .bindings .head{text-align:center;margin-bottom:clamp(40px,6vw,58px)}
+  .bindings .head .lab{margin:0 0 16px}
+  .bindings .head h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,3.8vw,44px);letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .bindings .head p{font-size:16px;color:var(--ink-2);max-width:52ch;margin:16px auto 0;line-height:1.6}
+  .bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .cover{position:relative;aspect-ratio:3/4;border-radius:5px;overflow:hidden;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:9px;padding:14px;text-align:center;
+    background:
+      radial-gradient(140% 100% at 50% 10%, rgba(255,255,255,.14), rgba(255,255,255,0) 46%),
+      linear-gradient(180deg, rgba(0,0,0,0) 52%, rgba(0,0,0,.34)),
+      var(--c);
+    box-shadow:0 22px 44px -26px rgba(20,8,10,.7), inset 0 0 0 1px rgba(255,255,255,.06);
+    border:1px solid rgba(0,0,0,.25)}
+  .cover .wm{font-family:var(--disp);font-weight:600;font-size:clamp(15px,1.5vw,21px);letter-spacing:.01em;color:var(--f);text-shadow:0 1px 1px rgba(0,0,0,.35);line-height:1}
+  .cover .bn{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--f);opacity:.82}
+  .bcap{text-align:center;font-size:15px;color:var(--ink-2);max-width:56ch;margin:36px auto 0;line-height:1.65}
+  .bcap b{color:var(--ink);font-weight:500}
+
+  /* ---------- pricing (understated) ---------- */
+  .price{text-align:center;padding:clamp(70px,10vw,124px) 0}
+  .price .lab{margin:0 0 18px}
+  .price h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,3.8vw,44px);letter-spacing:-.01em;margin:0 auto 14px;max-width:20ch;color:var(--ink)}
+  .price .amt{font-family:var(--disp);font-size:26px;color:var(--gold);font-style:italic;margin:0 0 40px}
+  .price .amt small{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);font-style:normal;display:block;margin-top:10px}
+  .plist{list-style:none;padding:0;margin:0 auto;max-width:720px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .plist li{font-size:16px;color:var(--ink-2);padding:16px 8px;border-top:1px solid var(--line);text-align:left;display:flex;gap:12px;align-items:center}
+  .plist li::before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;flex:none}
+
+  /* ---------- narrative ---------- */
+  .story{padding:clamp(60px,8vw,110px) 0}
+  .story .col{max-width:760px;margin:0 auto;padding:0 40px}
+  .story .lab{text-align:center;margin:0 0 40px}
+  .story h3{font-family:var(--disp);font-weight:500;font-size:clamp(22px,2.8vw,28px);letter-spacing:-.005em;color:var(--ink);margin:36px 0 12px}
+  .story p{font-size:17.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px}
+  .story strong{color:var(--ink);font-weight:500}
+
+  /* ---------- FAQ ---------- */
+  .faq{padding:clamp(50px,7vw,90px) 0}
+  .faq .col{max-width:820px;margin:0 auto;padding:0 40px}
+  .faq .lab{text-align:center;margin:0 0 44px}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;padding:26px 4px;font-family:var(--disp);font-size:20px;font-weight:500;color:var(--ink);display:flex;justify-content:space-between;gap:20px;align-items:baseline}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--mono);font-size:20px;font-weight:400;color:var(--gold);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq .a{padding:0 4px 28px;font-size:16px;line-height:1.8;color:var(--ink-2);max-width:64ch}
+
+  /* ---------- final ---------- */
+  .final{background:linear-gradient(160deg,#240910,#4E1020);color:#fff;text-align:center;padding:clamp(84px,12vw,150px) 40px}
+  .final .rule{width:46px;height:1px;background:var(--gold);margin:0 auto 32px}
+  .final h2{font-family:var(--disp);font-weight:400;font-size:clamp(28px,4.4vw,52px);line-height:1.1;letter-spacing:-.01em;margin:0 auto 16px;max-width:18ch}
+  .final p{color:#EADDCB;font-size:16px;margin:0 0 34px;font-weight:300}
+  .final .soon{justify-content:center}
+
+  footer{border-top:1px solid var(--line);background:var(--paper)}
+  footer .in{max-width:1220px;margin:0 auto;padding:30px 40px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--soft)}
+  footer a{color:var(--soft);text-decoration:none}footer a:hover{color:var(--gold)}
+  a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  .zoom{cursor:zoom-in}
+  .lb{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(14,5,8,.92);padding:24px}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:90vh;width:auto;height:auto;border-radius:10px;box-shadow:0 40px 90px -30px rgba(0,0,0,.85)}
+  .lb .x{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.32);background:rgba(0,0,0,.35);color:#fff;font-family:var(--serif);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .lb .x:hover{background:rgba(0,0,0,.6);border-color:var(--gold)}
+  .zoomhint{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:18px 0 0}
+
+  @media (max-width:860px){
+    .wrap,.nav,.hero .hin,footer .in,.story .col,.faq .col{padding-left:24px;padding-right:24px}
+    .carousel{padding:0}.cnav{display:none}.track{max-width:100%;flex:1 1 100%}
+    .ed .appshot{max-width:400px}
+    .hero{min-height:78vh;background-position:52% 44%}
+    .ed{padding:clamp(48px,8vw,90px) 0}
+    .nav .lg b{display:none}
+    .ed .grid,.ed.rev .grid{grid-template-columns:1fr;direction:ltr;gap:34px}
+    .ed .phone{max-width:300px}
+    .vgrid{grid-template-columns:1fr}
+    .bgrid{grid-template-columns:repeat(2,1fr)}
+    .plist{grid-template-columns:1fr;max-width:420px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="lg" href="./" aria-label="Setvault — home"><img src="logo.png" alt=""><b>Setvault</b></a>
+    <span class="links">
+      <a href="#collection">Collection</a>
+      <a href="support/">Support</a>
+      <a href="privacy/">Privacy</a>
+    </span>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hin">
+    <p class="lab">Coin collecting · offline &amp; private</p>
+    <h1>Your coin album,<br><em>kept private.</em></h1>
+    <p>A digital album for the collection you already hold. Your own coins, your own photographs, encrypted on your device.</p>
+    <div class="row">
+      <span class="soon" role="img" aria-label="Coming soon on Google Play">
+        <img src="gplay.svg" alt=""><span class="pl"><small>Coming soon on</small><b>Google Play</b></span>
+      </span>
+      <a class="disc lt" href="#collection">Discover ↓</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- Editorial 1: the album -->
+  <section class="ed" id="collection">
+    <div class="wrap"><div class="grid">
+      <div class="appshot"><img class="zoom" data-full="img/full/album.jpg" src="img/album_shot.jpg" alt="Setvault album page showing Kennedy Half Dollar slots by date and mint mark"></div>
+      <div class="txt">
+        <p class="lab">The album</p>
+        <h2>Fill the set, one coin at a time.</h2>
+        <p>Setvault works like a classic coin folder — a page of slots for every date and mint mark. Choose a series such as the Lincoln Wheat Cent, 1909 to 1958, and watch it fill as your collection grows.</p>
+        <a class="disc" href="#capture">Continue →</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Editorial 2: capture -->
+  <section class="ed rev" id="capture">
+    <div class="wrap"><div class="grid">
+      <div class="shot"><img src="img/capture.jpg" alt="A hand holding a Kennedy half dollar and a presidential dollar outdoors in a sunlit park"></div>
+      <div class="txt">
+        <p class="lab">Capture</p>
+        <h2>Your coins, your photographs.</h2>
+        <p>Snap your own coin with the circular guide. It is saved as a compact image, encrypted on your device — your photograph, never uploaded. The coins in your album are the ones you truly own.</p>
+        <a class="disc" href="#facts">Continue →</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Editorial 3: facts -->
+  <section class="ed" id="facts">
+    <div class="wrap"><div class="grid">
+      <div class="appshot"><img class="zoom" data-full="img/full/detail.jpg" src="img/detail_shot.jpg" alt="Setvault coin detail with mintage, composition, weight and designer"></div>
+      <div class="txt">
+        <p class="lab">Encyclopedia</p>
+        <h2>Facts you can rely on.</h2>
+        <p>Dates, mint marks, mintages and specifications come from public-domain sources like the U.S. Mint, cross-checked before they ship. Numismatic accuracy is the point — the app never guesses, and never invents a mintage.</p>
+        <a class="disc" href="#values">Continue →</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- Adding a coin (flow) -->
+  <section class="flow" id="flow">
+    <div class="wrap"><div class="head">
+      <p class="lab">Adding a coin</p>
+      <h2>From your hand to the album.</h2>
+      <p>Capture both faces, crop and correct the lighting — never inventing color — and the coin lands in its slot, fully documented. Swipe through the flow.</p>
+    </div></div>
+    <div class="carousel">
+      <button class="cnav prev" aria-label="Previous step">‹</button>
+      <div class="track">
+        <img class="on zoom" data-full="img/full/capture.jpg" src="img/steps/capture.jpg" alt="Capture with guided focus, saved encrypted on your device">
+        <img class="zoom" data-full="img/full/crop.jpg" src="img/steps/crop.jpg" alt="Crop the coin into the circle for a clean fit">
+        <img class="zoom" data-full="img/full/adjust.jpg" src="img/steps/adjust.jpg" alt="Adjust brightness, warmth and rotation; the original is never changed">
+        <img class="zoom" data-full="img/full/reverse.jpg" src="img/steps/reverse.jpg" alt="Capture both faces of the coin">
+        <img class="zoom" data-full="img/full/preview3d.jpg" src="img/steps/preview3d.jpg" alt="Turn your own coin in 3D to admire the detail">
+      </div>
+      <button class="cnav next" aria-label="Next step">›</button>
+    </div>
+    <div class="cmeta">
+      <p class="cname">01 · Capture</p>
+      <p class="cdesc">Guided focus, steady detection — saved encrypted on your device.</p>
+    </div>
+    <div class="dots" role="tablist" aria-label="Adding a coin steps">
+      <button class="on" aria-label="Step 1: Capture"></button>
+      <button aria-label="Step 2: Crop"></button>
+      <button aria-label="Step 3: Adjust"></button>
+      <button aria-label="Step 4: Both faces"></button>
+      <button aria-label="Step 5: In 3D"></button>
+    </div>
+    <p class="zoomhint">Tap any screen to zoom in</p>
+  </section>
+
+  <!-- Statement -->
+  <section class="statement">
+    <div class="rule"></div>
+    <blockquote>You hold your collection, on storage you trust.</blockquote>
+    <p>Encrypted on device · No cloud · No account</p>
+  </section>
+
+  <!-- Values -->
+  <section class="values" id="values">
+    <div class="wrap">
+      <div class="head"><p class="lab">Why Setvault</p><h2>Honest, private, and yours.</h2></div>
+      <div class="vgrid">
+        <div class="vitem"><p class="n">01</p><h3>Offline &amp; encrypted</h3><p>Everything lives encrypted on your device with SQLCipher. No cloud, no account, no analytics.</p></div>
+        <div class="vitem"><p class="n">02</p><h3>Your own photos</h3><p>The coins in your album are the ones you own and photographed. No stock images, no AI guesses.</p></div>
+        <div class="vitem"><p class="n">03</p><h3>Accurate facts</h3><p>Mintages and specifications compiled from public-domain sources and cross-checked. Never invented.</p></div>
+        <div class="vitem"><p class="n">04</p><h3>Yours to keep</h3><p>Export your whole collection to a single .setvault file — always free. Open formats, no lock-in.</p></div>
+        <div class="vitem"><p class="n">05</p><h3>Pay once</h3><p>A single $19.99 unlocks Pro forever. No subscription, no add-ons, every future update included.</p></div>
+        <div class="vitem"><p class="n">06</p><h3>No ads, no tricks</h3><p>No advertising, no dark patterns. A calm, honest app, built to be kept for years.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bindings -->
+  <section class="bindings" id="bindings">
+    <div class="wrap">
+      <div class="head">
+        <p class="lab">Make it yours</p>
+        <h2>Eight leather bindings.</h2>
+        <p>Give every album its own cover — the warmth of real leather with metallic foil. Silver as standard, gold to crown a finished set, in light and dark mode alike.</p>
+      </div>
+      <div class="bgrid">
+        <div class="cover" style="--c:#591521;--f:#CDA349"><span class="wm">Setvault</span><span class="bn">Burgundy</span></div>
+        <div class="cover" style="--c:#1B2A4A;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Midnight Navy</span></div>
+        <div class="cover" style="--c:#14352A;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Racing Green</span></div>
+        <div class="cover" style="--c:#4A2418;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Oxblood</span></div>
+        <div class="cover" style="--c:#333A40;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Slate</span></div>
+        <div class="cover" style="--c:#423524;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Kraft</span></div>
+        <div class="cover" style="--c:#14100E;--f:#CDA349"><span class="wm">Setvault</span><span class="bn">Ink Black</span></div>
+        <div class="cover" style="--c:#3C2140;--f:#C9CDD2"><span class="wm">Setvault</span><span class="bn">Aubergine</span></div>
+      </div>
+      <p class="bcap"><b>Your first album is free.</b> Pro unlocks all eight bindings and themes — one payment, no subscription.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="price">
+    <div class="wrap">
+      <p class="lab">One-time unlock</p>
+      <h2>Free for your first album. Unlock everything once.</h2>
+      <p class="amt">$19.99 once<small>No subscription, ever</small></p>
+      <ul class="plist">
+        <li>Unlimited albums &amp; series</li>
+        <li>All eight leather bindings &amp; themes</li>
+        <li>Collection statistics &amp; insights</li>
+        <li>Advanced export — CSV + full-res photos</li>
+        <li>Restore purchase on any device</li>
+        <li>Every future update included</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Narrative / SEO -->
+  <section class="story" id="about">
+    <div class="col">
+      <p class="lab">The idea</p>
+      <h3>A digital album you actually own</h3>
+      <p>Most collectors keep their coins in a <strong>Whitman-style folder</strong> — a page of labeled slots you fill over the years. Setvault brings that ritual to your phone without taking anything away from you: your coins stay yours, your photos stay on your device, and your collection is never locked into someone else's cloud.</p>
+      <h3>Built around self-custody</h3>
+      <p>Everything is stored <strong>encrypted on your device</strong>. There is no account to create and no server that holds your data. When you want a backup, you export a single <strong>.setvault file</strong> and keep it on the drive you trust. That is the whole promise: you hold your collection, on storage you choose.</p>
+      <h3>Facts you can rely on</h3>
+      <p>The dates, mint marks, mintages and specifications come from <strong>public-domain sources</strong> and are cross-checked before they ship. Numismatic accuracy is the point — so the app never guesses and never invents a mintage.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="col">
+      <p class="lab">Frequently asked</p>
+      <details><summary>Is Setvault free?</summary><div class="a">Yes. Setvault is free for your first album, with unlimited coins inside it. A single one-time payment of $19.99 unlocks Pro — unlimited albums, every binding and theme, statistics and advanced export. There is no subscription and there are no ads.</div></details>
+      <details><summary>Does Setvault use the cloud?</summary><div class="a">No. Everything is stored encrypted on your device with SQLCipher. There is no account, no cloud and no analytics. You back up your collection to a single .setvault file that you keep wherever you trust.</div></details>
+      <details><summary>Can Setvault identify a coin from a photo?</summary><div class="a">No, and that is on purpose. Your photo is a record of the coin you own, not an AI guess. You choose the slot in the album, and Setvault provides the historical facts.</div></details>
+      <details><summary>Where do the coin facts come from?</summary><div class="a">From public-domain sources such as the U.S. Mint, cross-checked against independent references. Facts are not copyrightable, and we never invent mintages or specifications.</div></details>
+      <details><summary>Which coins are included?</summary><div class="a">Setvault starts with United States series such as the Lincoln Wheat Cent (1909–1958), Jefferson Nickel, Mercury Dime and the 50 State Quarters, with more series on the way.</div></details>
+      <details><summary>What happens to my collection if I lose my phone?</summary><div class="a">You export an encrypted .setvault backup file and keep it wherever you like. Importing it restores everything, photos included. Basic export is always free — we never hold your data hostage.</div></details>
+    </div>
+  </section>
+</main>
+
+<!-- Final -->
+<section class="final">
+  <div class="rule"></div>
+  <h2>Your collection deserves a private home.</h2>
+  <p>Coming soon to Google Play. iOS to follow.</p>
+  <span class="soon" role="img" aria-label="Coming soon on Google Play">
+    <img src="gplay.svg" alt=""><span class="pl"><small>Coming soon on</small><b>Google Play</b></span>
+  </span>
+</section>
+
+<footer><div class="in"><span>A product of <a href="../" style="display:inline-flex;align-items:center;gap:5px;vertical-align:middle"><img src="../assets/renovatio_icon.svg" alt="" style="height:14px;width:14px;display:block" />Renovatio Software</a></span><span>·</span><span>© 2026 <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span><span>·</span><a href="mailto:support@renovatiosoftware.net">support@renovatiosoftware.net</a><span>·</span><span>Made in Colombia</span></div></footer>
+
+<div class="lb" id="lightbox" aria-hidden="true"><button class="x" aria-label="Close">✕</button><img alt="Zoomed screenshot"></div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lightbox'); if(!lb)return;
+  var big=lb.querySelector('img');
+  function open(src){ big.src=src; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; big.removeAttribute('src'); }
+  document.addEventListener('click',function(e){
+    var z=e.target.closest('.zoom');
+    if(z){ open(z.getAttribute('data-full')||z.getAttribute('src')); return; }
+    if(e.target===lb || e.target.classList.contains('x')){ close(); }
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+
+<script>
+(function(){
+  var flow=document.getElementById('flow'); if(!flow)return;
+  var imgs=flow.querySelectorAll('.track img');
+  var dots=flow.querySelectorAll('.dots button');
+  var name=flow.querySelector('.cname'), desc=flow.querySelector('.cdesc');
+  var meta=[
+    ['01 · Capture','Guided focus, steady detection — saved encrypted on your device.'],
+    ['02 · Crop','Nudge the coin into the circle for a clean, precise fit.'],
+    ['03 · Adjust','Brightness, warmth, rotation — your original photo is never changed.'],
+    ['04 · Both faces','Photograph the obverse and the reverse. Keep every side.'],
+    ['05 · In 3D','Spin your own coin, zoom in, and admire the detail.']
+  ];
+  var i=0, n=imgs.length;
+  function go(k){ i=(k+n)%n;
+    imgs.forEach(function(im,x){im.classList.toggle('on',x===i);});
+    dots.forEach(function(d,x){d.classList.toggle('on',x===i);});
+    name.textContent=meta[i][0]; desc.textContent=meta[i][1];
+  }
+  flow.querySelector('.prev').addEventListener('click',function(){go(i-1);});
+  flow.querySelector('.next').addEventListener('click',function(){go(i+1);});
+  dots.forEach(function(d,x){d.addEventListener('click',function(){go(x);});});
+  var x0=null, track=flow.querySelector('.track');
+  track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){go(dx<0?i+1:i-1);} x0=null;},{passive:true});
+  go(0);
+})();
+</script>
+</body>
+</html>
