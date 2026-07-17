@@ -263,5 +263,13 @@
     document.querySelectorAll('.sec').forEach(function(s){ io.observe(s); });
   })();
 </script>
+<style>img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;user-drag:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}</style>
+<script>
+(function(){
+  function block(e){ if(e.target && e.target.tagName === 'IMG'){ e.preventDefault(); return false; } }
+  document.addEventListener('contextmenu', block);
+  document.addEventListener('dragstart', block);
+})();
+</script>
 </body>
 </html>
