@@ -27,17 +27,17 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Person","@id":"https://renovatiosoftware.net/setvault/#dev","name":"Camilo Meneses","url":"https://renovatiosoftware.net/setvault/","image":"https://renovatiosoftware.net/setvault/logo.png","email":"contact@renovatiosoftware.net"},
-{"@type":"MobileApplication","name":"Setvault","operatingSystem":"Android","applicationCategory":"LifestyleApplication","url":"https://renovatiosoftware.net/setvault/","image":"https://renovatiosoftware.net/setvault/logo.png","inLanguage":"en","description":"A private, offline album for your coin collection. Photograph your own coins, complete classic series with accurate mintage facts, and keep everything encrypted on your device.","publisher":{"@id":"https://renovatiosoftware.net/setvault/#dev"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to download. One-time $19.99 in-app unlock for Pro. No subscription."}}
+{"@type":"MobileApplication","name":"Setvault","operatingSystem":"Android","applicationCategory":"LifestyleApplication","url":"https://renovatiosoftware.net/setvault/","image":"https://renovatiosoftware.net/setvault/logo.png","inLanguage":"en","description":"A private, offline album for your coin collection. Photograph your own coins, complete classic series with accurate mintage facts, and keep everything encrypted on your device.","publisher":{"@id":"https://renovatiosoftware.net/setvault/#dev"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to download. One-time $19.99 in-app unlock for the Full version. No subscription."}}
 ]}
 </script>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Is Setvault free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Setvault is free for your first album, with unlimited coins inside it. A single one-time payment of $19.99 unlocks Pro: unlimited albums, every binding and theme, statistics and advanced export. There is no subscription and there are no ads."}},
+{"@type":"Question","name":"Is Setvault free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Washington Quarter — 50 State Quarters album is free, so you can explore the whole app. A single one-time payment of $19.99 — the Full version — unlocks the other nine U.S. series and everything else: all eight bindings and themes, statistics and advanced export. There is no subscription and there are no ads."}},
 {"@type":"Question","name":"Does Setvault use the cloud?","acceptedAnswer":{"@type":"Answer","text":"No. Everything is stored encrypted on your device (SQLCipher). There is no account, no cloud and no analytics. You back up your collection to a single .setvault file that you keep wherever you trust."}},
 {"@type":"Question","name":"Can Setvault identify a coin from a photo?","acceptedAnswer":{"@type":"Answer","text":"No, and that is on purpose. Your photo is a record of the coin you own, not an AI guess. You choose the slot in the album; Setvault provides the historical facts."}},
 {"@type":"Question","name":"Where do the coin facts come from?","acceptedAnswer":{"@type":"Answer","text":"From public-domain sources such as the U.S. Mint, cross-checked against independent references. Facts are not copyrightable, and we never invent mintages or specifications."}},
-{"@type":"Question","name":"Which coins are included?","acceptedAnswer":{"@type":"Answer","text":"Setvault starts with United States series such as the Lincoln Wheat Cent (1909–1958), Jefferson Nickel, Mercury Dime and the 50 State Quarters, with more on the way."}},
+{"@type":"Question","name":"Which coins are included?","acceptedAnswer":{"@type":"Answer","text":"Setvault launches with ten United States series: the Washington Quarter — 50 State Quarters (free), Lincoln Cent (Wheat and Memorial), Buffalo Nickel, Jefferson Nickel, Mercury Dime, Roosevelt Dime, Washington Quarter (1932–1998), Kennedy Half Dollar and Morgan Dollar — with more on the way."}},
 {"@type":"Question","name":"What happens to my collection if I lose my phone?","acceptedAnswer":{"@type":"Answer","text":"You export an encrypted .setvault backup file and keep it wherever you like. Importing it restores everything, photos included. Basic export is always free — we never hold your data hostage."}}
 ]}
 </script>
@@ -188,6 +188,14 @@
   .plist{list-style:none;padding:0;margin:0 auto;max-width:720px;display:grid;grid-template-columns:1fr 1fr;gap:0}
   .plist li{font-size:16px;color:var(--ink-2);padding:16px 8px;border-top:1px solid var(--line);text-align:left;display:flex;gap:12px;align-items:center}
   .plist li::before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;flex:none}
+  .price .pintro{font-size:16.5px;line-height:1.7;color:var(--ink-2);max-width:54ch;margin:0 auto 38px}
+  .price .pintro strong{color:var(--ink);font-weight:500}
+  .cat{max-width:720px;margin:52px auto 0;text-align:left}
+  .cat h3{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 8px}
+  .cat ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+  .cat li{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:13px 0;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink)}
+  .cat li em{font-family:var(--mono);font-size:11.5px;color:var(--soft);font-style:normal;white-space:nowrap}
+  .cat li .fr{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:1px 6px;margin-left:8px}
 
   /* ---------- narrative ---------- */
   .story{padding:clamp(60px,8vw,110px) 0}
@@ -241,6 +249,7 @@
     .vgrid{grid-template-columns:1fr}
     .bgrid{grid-template-columns:repeat(2,1fr)}
     .plist{grid-template-columns:1fr;max-width:420px}
+    .cat{max-width:480px}.cat ul{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -359,7 +368,7 @@
         <div class="vitem"><p class="n">02</p><h3>Your own photos</h3><p>The coins in your album are the ones you own and photographed. No stock images, no AI guesses.</p></div>
         <div class="vitem"><p class="n">03</p><h3>Accurate facts</h3><p>Mintages and specifications compiled from public-domain sources and cross-checked. Never invented.</p></div>
         <div class="vitem"><p class="n">04</p><h3>Yours to keep</h3><p>Export your whole collection to a single .setvault file — always free. Open formats, no lock-in.</p></div>
-        <div class="vitem"><p class="n">05</p><h3>Pay once</h3><p>A single $19.99 unlocks Pro forever. No subscription, no add-ons, every future update included.</p></div>
+        <div class="vitem"><p class="n">05</p><h3>Pay once</h3><p>A single $19.99 unlocks the Full version forever. No subscription, no add-ons, every future update included.</p></div>
         <div class="vitem"><p class="n">06</p><h3>No ads, no tricks</h3><p>No advertising, no dark patterns. A calm, honest app, built to be kept for years.</p></div>
       </div>
     </div>
@@ -383,7 +392,7 @@
         <div class="cover" style="--c:#14100E;--f:#CDA349"><span class="wm">Setvault</span><span class="bn">Ink Black</span></div>
         <div class="cover" style="--c:#3C2140;--f:#C79A6B"><span class="wm">Setvault</span><span class="bn">Aubergine</span></div>
       </div>
-      <p class="bcap"><b>Your first album is free.</b> Pro unlocks all eight bindings and themes — one payment, no subscription.</p>
+      <p class="bcap"><b>Your first album is free.</b> The Full version unlocks all eight bindings and themes — one payment, no subscription.</p>
     </div>
   </section>
 
@@ -391,16 +400,32 @@
   <section class="price">
     <div class="wrap">
       <p class="lab">One-time unlock</p>
-      <h2>Free for your first album. Unlock everything once.</h2>
+      <h2>Free to explore. Unlock the full catalogue once.</h2>
       <p class="amt">$19.99 once<small>No subscription, ever</small></p>
+      <p class="pintro">Start free with the <strong>Washington Quarter — 50 State Quarters</strong> album (100 slots) and get to know the app. The <strong>Full version</strong>, a single $19.99, unlocks the other nine U.S. series and everything else.</p>
       <ul class="plist">
-        <li>Unlimited albums &amp; series</li>
+        <li>All ten launch series &amp; albums</li>
         <li>All eight leather bindings &amp; themes</li>
         <li>Collection statistics &amp; insights</li>
         <li>Advanced export — CSV + full-res photos</li>
         <li>Restore purchase on any device</li>
         <li>Every future update included</li>
       </ul>
+      <div class="cat">
+        <h3>The launch catalogue · 10 U.S. series</h3>
+        <ul>
+          <li><span>Washington Quarter — State Quarters <span class="fr">Free</span></span><em>1999–2008 · 100</em></li>
+          <li><span>Lincoln Cent — Wheat</span><em>1909–1958 · 142</em></li>
+          <li><span>Lincoln Cent — Memorial</span><em>1959–2008 · 106</em></li>
+          <li><span>Buffalo Nickel</span><em>1913–1938 · 66</em></li>
+          <li><span>Jefferson Nickel</span><em>1938–2003 · 147</em></li>
+          <li><span>Mercury Dime</span><em>1916–1945 · 79</em></li>
+          <li><span>Roosevelt Dime</span><em>1946–2000 · 119</em></li>
+          <li><span>Washington Quarter</span><em>1932–1998 · 147</em></li>
+          <li><span>Kennedy Half Dollar</span><em>1964–2023 · 113</em></li>
+          <li><span>Morgan Dollar</span><em>1878–1921 · 98</em></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -421,11 +446,11 @@
   <section class="faq" id="faq">
     <div class="col">
       <p class="lab">Frequently asked</p>
-      <details><summary>Is Setvault free?</summary><div class="a">Yes. Setvault is free for your first album, with unlimited coins inside it. A single one-time payment of $19.99 unlocks Pro — unlimited albums, every binding and theme, statistics and advanced export. There is no subscription and there are no ads.</div></details>
+      <details><summary>Is Setvault free?</summary><div class="a">Yes. The <strong>Washington Quarter — 50 State Quarters</strong> album is free, so you can explore the whole app. A single one-time payment of $19.99 — the <strong>Full version</strong> — unlocks the other nine U.S. series and everything else: all eight bindings and themes, statistics and advanced export. There is no subscription and there are no ads.</div></details>
       <details><summary>Does Setvault use the cloud?</summary><div class="a">No. Everything is stored encrypted on your device with SQLCipher. There is no account, no cloud and no analytics. You back up your collection to a single .setvault file that you keep wherever you trust.</div></details>
       <details><summary>Can Setvault identify a coin from a photo?</summary><div class="a">No, and that is on purpose. Your photo is a record of the coin you own, not an AI guess. You choose the slot in the album, and Setvault provides the historical facts.</div></details>
       <details><summary>Where do the coin facts come from?</summary><div class="a">From public-domain sources such as the U.S. Mint, cross-checked against independent references. Facts are not copyrightable, and we never invent mintages or specifications.</div></details>
-      <details><summary>Which coins are included?</summary><div class="a">Setvault starts with United States series such as the Lincoln Wheat Cent (1909–1958), Jefferson Nickel, Mercury Dime and the 50 State Quarters, with more series on the way.</div></details>
+      <details><summary>Which coins are included?</summary><div class="a">Setvault launches with <strong>ten United States series</strong>: Washington Quarter — 50 State Quarters (free), Lincoln Cent (Wheat and Memorial), Buffalo Nickel, Jefferson Nickel, Mercury Dime, Roosevelt Dime, Washington Quarter (1932–1998), Kennedy Half Dollar and Morgan Dollar. More series are on the way — tell us which one you'd like next.</div></details>
       <details><summary>What happens to my collection if I lose my phone?</summary><div class="a">You export an encrypted .setvault backup file and keep it wherever you like. Importing it restores everything, photos included. Basic export is always free — we never hold your data hostage.</div></details>
     </div>
   </section>
@@ -441,7 +466,7 @@
   </span>
 </section>
 
-<footer><div class="in"><span>A product of <a href="../" style="display:inline-flex;align-items:center;gap:5px;vertical-align:middle"><img src="../assets/renovatio_icon.svg" alt="" style="height:14px;width:14px;display:block" />Renovatio Software</a></span><span>·</span><span>© 2026 <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span><span>·</span><a href="mailto:support@renovatiosoftware.net">support@renovatiosoftware.net</a><span>·</span><span>Made in Colombia</span></div></footer>
+<footer><div class="in"><span>A product of <a href="../" style="display:inline-flex;align-items:center;gap:5px;vertical-align:middle"><img src="../assets/renovatio_icon.svg" alt="" style="height:14px;width:14px;display:block" />Renovatio Software</a></span><span>·</span><span>© 2026 <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span><span>·</span><a href="privacy/">Privacy</a><span>·</span><a href="terms/">Terms</a><span>·</span><a href="refund/">Refund</a><span>·</span><a href="mailto:support@renovatiosoftware.net">support@renovatiosoftware.net</a><span>·</span><span>Made in Colombia</span></div></footer>
 
 <div class="lb" id="lightbox" aria-hidden="true"><button class="x" aria-label="Close">✕</button><img alt="Zoomed screenshot"></div>
 
