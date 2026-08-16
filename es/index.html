@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+<script>
+/* Resuelve el tema antes del primer pintado: sin esto se ve un destello blanco. */
+(function(){try{var t=localStorage.getItem('rs-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+</script>
 <title>Renovatio Software — Software a la medida, web y apps con privacidad</title>
 <meta name="description" content="Renovatio Software, dirigido por Camilo Meneses, es un estudio independiente que construye software a la medida, aplicaciones web y apps móviles que respetan la privacidad, para clientes de todo el mundo." />
 <link rel="icon" type="image/svg+xml" href="../assets/renovatio_icon.svg" />
@@ -25,12 +30,65 @@
 <style>
   @font-face{font-family:'Onest';font-style:normal;font-weight:400 800;font-display:swap;src:url(../assets/fonts/onest.woff2) format('woff2')}
   @font-face{font-family:'Geist Mono';font-style:normal;font-weight:400 600;font-display:swap;src:url(../assets/fonts/geistmono.woff2) format('woff2')}
+  /* ---------- Tema claro (base) ---------- */
   :root{
-    --ink:#0f172a;--ink-soft:#334155;--muted:#64748b;--line:#e6e8ee;--bg:#ffffff;
+    color-scheme:light;
+    --ink:#0f172a;--ink-soft:#334155;--muted:#64748b;--line:#e6e8ee;--line-strong:#cbd5e1;
+    --bg:#ffffff;--surface:#ffffff;--panel:#f8fafc;--band-top:#fbfbfd;--band-bottom:#ffffff;
+    --nav-bg:rgba(255,255,255,.72);--nav-line:rgba(230,232,238,.7);--btn-fg:#ffffff;
     --blue:#2563eb;--orange:#f97316;--violet:#7c3aed;--radius:22px;
+    --glow-blue:rgba(37,99,235,.20);--glow-orange:rgba(249,115,22,.18);--glow-violet:rgba(124,58,237,.10);
+    --panel-blue:rgba(37,99,235,.16);--panel-orange:rgba(249,115,22,.16);
+    --ok-bg:#ecfdf5;--ok-fg:#047857;--ok-line:#a7f3d0;--ok-dot:#10b981;
+    --warn-bg:#fff7ed;--warn-fg:#c2410c;--warn-line:#fed7aa;--warn-dot:#f59e0b;
+    --cat-bg:#eff6ff;--cat-fg:#1d4ed8;--cat-line:#bfdbfe;
     --shadow:0 1px 2px rgba(15,23,42,.04), 0 12px 30px -12px rgba(15,23,42,.12);
+    --shadow-lift:0 1px 2px rgba(15,23,42,.04),0 22px 46px -20px rgba(15,23,42,.22);
     --font:'Onest',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
     --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  /* ---------- Tema oscuro: azul-noche templado ----------
+     Neutros tintados al hue del azul de marca (OKLCH H 262.9), nunca negro puro.
+     Los dos bloques deben mantenerse IDÉNTICOS: el @media cubre a quien no tenga JS,
+     el [data-theme] cubre la elección manual del toggle. */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ink:#e7ebf3;--ink-soft:#b3bbc9;--muted:#8a93a3;--line:#2b323f;--line-strong:#5a6475;
+      --bg:#0b0f18;--surface:#191f2a;--panel:#121721;--band-top:#0e131d;--band-bottom:#0b0f18;
+      --nav-bg:rgba(11,15,24,.72);--nav-line:rgba(43,50,63,.7);--btn-fg:#0b0f18;
+      --blue:#71a2ff;--orange:#f99549;--violet:#b298f9;
+      --glow-blue:rgba(56,90,190,.30);--glow-orange:rgba(190,90,30,.22);--glow-violet:rgba(110,70,200,.20);
+      --panel-blue:rgba(56,90,190,.24);--panel-orange:rgba(190,90,30,.18);
+      --ok-bg:#223839;--ok-fg:#56d298;--ok-line:#2d584d;--ok-dot:#56d298;
+      --warn-bg:#37332e;--warn-fg:#f2af48;--warn-line:#5e4d34;--warn-dot:#f2af48;
+      --cat-bg:#253148;--cat-fg:#71a2ff;--cat-line:#35496e;
+      --shadow:0 1px 2px rgba(0,0,0,.40), 0 12px 30px -12px rgba(0,0,0,.55);
+      --shadow-lift:0 1px 2px rgba(0,0,0,.40),0 22px 46px -20px rgba(0,0,0,.70);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ink:#e7ebf3;--ink-soft:#b3bbc9;--muted:#8a93a3;--line:#2b323f;--line-strong:#5a6475;
+    --bg:#0b0f18;--surface:#191f2a;--panel:#121721;--band-top:#0e131d;--band-bottom:#0b0f18;
+    --nav-bg:rgba(11,15,24,.72);--nav-line:rgba(43,50,63,.7);--btn-fg:#0b0f18;
+    --blue:#71a2ff;--orange:#f99549;--violet:#b298f9;
+    --glow-blue:rgba(56,90,190,.30);--glow-orange:rgba(190,90,30,.22);--glow-violet:rgba(110,70,200,.20);
+    --panel-blue:rgba(56,90,190,.24);--panel-orange:rgba(190,90,30,.18);
+    --ok-bg:#223839;--ok-fg:#56d298;--ok-line:#2d584d;--ok-dot:#56d298;
+    --warn-bg:#37332e;--warn-fg:#f2af48;--warn-line:#5e4d34;--warn-dot:#f2af48;
+    --cat-bg:#253148;--cat-fg:#71a2ff;--cat-line:#35496e;
+    --shadow:0 1px 2px rgba(0,0,0,.40), 0 12px 30px -12px rgba(0,0,0,.55);
+    --shadow-lift:0 1px 2px rgba(0,0,0,.40),0 22px 46px -20px rgba(0,0,0,.70);
+  }
+  /* Activos que cambian con el tema (logo del nav, ícono del pie, logo del aliado) */
+  img.only-light{display:block}
+  img.only-dark{display:none}
+  :root[data-theme="dark"] img.only-light{display:none}
+  :root[data-theme="dark"] img.only-dark{display:block}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) img.only-light{display:none}
+    :root:not([data-theme="light"]) img.only-dark{display:block}
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -40,7 +98,7 @@
   section{position:relative}
   .eyebrow{font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 
-  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(12px);background:rgba(255,255,255,.72);border-bottom:1px solid rgba(230,232,238,.7)}
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(12px);background:var(--nav-bg);border-bottom:1px solid var(--nav-line)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
   .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.06rem;letter-spacing:-.01em}
   .brand-logo{height:34px;width:auto;display:block}
@@ -48,24 +106,38 @@
   .nav-links a{color:var(--ink-soft);font-weight:500;font-size:.95rem}
   .nav-links a:hover{color:var(--ink)}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:.95rem;border-radius:999px;padding:11px 22px;border:1px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease}
-  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark{background:var(--ink);color:var(--btn-fg)}
   .btn-dark:hover{transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(15,23,42,.6)}
-  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
-  .btn-ghost:hover{border-color:#cbd5e1;transform:translateY(-1px)}
+  .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--line-strong);transform:translateY(-1px)}
   .nav .btn{padding:9px 18px;white-space:nowrap}
-  .nav-links a.cta-nav{display:inline-flex;color:#fff}
+  .nav-links a.cta-nav{display:inline-flex;color:var(--btn-fg)}
   .lang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:3px;font-family:var(--mono);font-size:.75rem}
   .lang a{padding:4px 9px;border-radius:999px;color:var(--muted);line-height:1}
   .lang a:hover{color:var(--ink)}
-  .lang a.lang-on{background:var(--ink);color:#fff}
+  .lang a.lang-on{background:var(--ink);color:var(--btn-fg)}
+
+  .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;
+    padding:0;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink-soft);
+    cursor:pointer;transition:color .15s ease, border-color .15s ease}
+  .theme-toggle:hover{color:var(--ink);border-color:var(--line-strong)}
+  .theme-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  .theme-toggle svg{width:17px;height:17px;display:block}
+  .theme-toggle .ic-sun{display:none}
+  :root[data-theme="dark"] .theme-toggle .ic-sun{display:block}
+  :root[data-theme="dark"] .theme-toggle .ic-moon{display:none}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .theme-toggle .ic-sun{display:block}
+    :root:not([data-theme="light"]) .theme-toggle .ic-moon{display:none}
+  }
 
   .hero{text-align:center;overflow:hidden;padding:96px 0 84px;
     background:
-      radial-gradient(1100px 520px at 14% 8%, rgba(37,99,235,.20), transparent 60%),
-      radial-gradient(1100px 620px at 88% 4%, rgba(249,115,22,.18), transparent 62%),
-      radial-gradient(900px 500px at 50% 120%, rgba(124,58,237,.10), transparent 60%),
-      #ffffff}
-  .pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.8);border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:.86rem;color:var(--ink-soft);font-weight:500;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+      radial-gradient(1100px 520px at 14% 8%, var(--glow-blue), transparent 60%),
+      radial-gradient(1100px 620px at 88% 4%, var(--glow-orange), transparent 62%),
+      radial-gradient(900px 500px at 50% 120%, var(--glow-violet), transparent 60%),
+      var(--bg)}
+  .pill{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:.86rem;color:var(--ink-soft);font-weight:500;box-shadow:0 1px 2px rgba(15,23,42,.04)}
   .pill .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--orange))}
   h1{font-size:clamp(2.2rem,5.6vw,4rem);line-height:1.05;font-weight:800;letter-spacing:-.03em;margin:26px auto 0;max-width:16ch}
   .hero p.lead{margin:24px auto 0;max-width:62ch;font-size:1.16rem;color:var(--ink-soft)}
@@ -75,7 +147,7 @@
   .builtwith{padding:44px 0 8px;text-align:center}
   .builtwith .eyebrow{color:var(--muted)}
   .stack{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px}
-  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 18px;font-weight:500;font-size:.9rem;color:var(--ink-soft);font-family:var(--mono)}
+  .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 18px;font-weight:500;font-size:.9rem;color:var(--ink-soft);font-family:var(--mono)}
 
   .section{padding:92px 0}
   .section-head{max-width:660px;margin:0 auto;text-align:center}
@@ -83,8 +155,8 @@
   .section-head p{margin-top:16px;color:var(--ink-soft);font-size:1.08rem}
 
   .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);position:relative;transition:transform .18s ease, box-shadow .18s ease}
-  .card:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(15,23,42,.04),0 22px 46px -20px rgba(15,23,42,.22)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);position:relative;transition:transform .18s ease, box-shadow .18s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
   .icon-tile{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:20px;box-shadow:0 8px 18px -8px rgba(15,23,42,.35)}
   .icon-tile svg{width:26px;height:26px}
   .ic-blue{background:linear-gradient(135deg,#3b82f6,#2563eb)}
@@ -93,26 +165,26 @@
   .card h3{font-size:1.22rem;font-weight:750;letter-spacing:-.01em}
   .card p{margin-top:12px;color:var(--ink-soft);font-size:1rem}
 
-  .products{background:linear-gradient(180deg,#fbfbfd,#ffffff)}
-  .product-card{background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;margin-top:52px;display:grid;grid-template-columns:1.15fr .85fr;gap:0}
+  .products{background:linear-gradient(180deg,var(--band-top),var(--band-bottom))}
+  .product-card{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;margin-top:52px;display:grid;grid-template-columns:1.15fr .85fr;gap:0}
   .product-body{padding:48px;display:flex;flex-direction:column;justify-content:center}
   .product-head{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
   .app-icon{width:46px;height:46px;border-radius:13px;border:1px solid var(--line);flex:none}
   .product-head h3{font-size:1.9rem;font-weight:800;letter-spacing:-.02em}
   .badge{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px}
-  .badge-live{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
-  .badge-live .dot{width:7px;height:7px;border-radius:50%;background:#10b981}
-  .badge-soon{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
-  .badge-soon .dot{width:7px;height:7px;border-radius:50%;background:#f59e0b}
+  .badge-live{background:var(--ok-bg);color:var(--ok-fg);border:1px solid var(--ok-line)}
+  .badge-live .dot{width:7px;height:7px;border-radius:50%;background:var(--ok-dot)}
+  .badge-soon{background:var(--warn-bg);color:var(--warn-fg);border:1px solid var(--warn-line)}
+  .badge-soon .dot{width:7px;height:7px;border-radius:50%;background:var(--warn-dot)}
   .product-body p.desc{margin-top:18px;color:var(--ink-soft);font-size:1.06rem;max-width:46ch}
   .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-  .tag{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:.86rem;font-weight:500;color:var(--ink-soft)}
+  .tag{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:.86rem;font-weight:500;color:var(--ink-soft)}
   .product-link{display:inline-flex;align-items:center;gap:6px;margin-top:26px;font-weight:600;font-size:.98rem;color:var(--blue)}
   .product-link:hover{gap:9px}
   .product-media{background:linear-gradient(160deg,#14284d,#0c1a34);display:flex;align-items:flex-end;justify-content:center;position:relative;overflow:hidden}
   .product-media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
   .lines{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
-  .line{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 28px;box-shadow:var(--shadow)}
+  .line{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px 28px;box-shadow:var(--shadow)}
   .line .ln-top{display:flex;align-items:center;gap:12px}
   .line .ln-ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;box-shadow:0 8px 18px -8px rgba(15,23,42,.35)}
   .line .ln-ic svg{width:22px;height:22px}
@@ -121,15 +193,15 @@
   .line h3{font-size:1.15rem;font-weight:750}
   .line p{margin-top:12px;color:var(--ink-soft);font-size:.98rem}
   .line .ln-tag{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
-  .tag-cat{color:#1d4ed8;background:#eff6ff;border-color:#bfdbfe;font-weight:600}
+  .tag-cat{color:var(--cat-fg);background:var(--cat-bg);border-color:var(--cat-line);font-weight:600}
   @media (max-width:760px){.lines{grid-template-columns:1fr}}
 
   .alliance{padding:0}
   .alliance .eyebrow{color:var(--muted);text-align:center;display:block}
   .alliance-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:38px;margin-top:24px;
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 38px;box-shadow:var(--shadow)}
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px 38px;box-shadow:var(--shadow)}
   .alliance-logo{padding-right:38px;border-right:1px solid var(--line)}
-  .alliance-logo img{width:196px;height:auto;display:block}
+  .alliance-logo img{width:196px;height:auto}
   .alliance-role{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
   .alliance-body h3{font-size:1.24rem;font-weight:750;letter-spacing:-.01em;margin-top:9px}
   .alliance-body p{margin-top:10px;color:var(--ink-soft);font-size:1rem;max-width:60ch}
@@ -145,12 +217,12 @@
   .value h3{font-size:1.3rem;font-weight:750}
   .value p{margin-top:12px;color:var(--ink-soft)}
 
-  .about{background:linear-gradient(180deg,#fbfbfd,#ffffff)}
+  .about{background:linear-gradient(180deg,var(--band-top),var(--band-bottom))}
   .about-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:44px;align-items:center;margin-top:6px}
   .about-text h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.02em;margin-top:12px}
   .about-text p{margin-top:18px;color:var(--ink-soft);font-size:1.07rem;max-width:58ch}
   .about-text p .name{color:var(--ink);font-weight:700}
-  .facts{background:#fff;border:1px solid var(--line);border-radius:20px;padding:10px 26px;box-shadow:var(--shadow)}
+  .facts{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:10px 26px;box-shadow:var(--shadow)}
   .facts .frow{display:flex;flex-direction:column;gap:3px;padding:17px 0;border-bottom:1px solid var(--line)}
   .facts .frow:last-child{border-bottom:0}
   .facts .fk{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -160,9 +232,9 @@
 
   .contact-panel{border-radius:32px;text-align:center;padding:72px 32px;margin-top:8px;
     background:
-      radial-gradient(700px 340px at 20% 0%, rgba(37,99,235,.16), transparent 62%),
-      radial-gradient(700px 360px at 82% 15%, rgba(249,115,22,.16), transparent 60%),
-      #f8fafc;
+      radial-gradient(700px 340px at 20% 0%, var(--panel-blue), transparent 62%),
+      radial-gradient(700px 360px at 82% 15%, var(--panel-orange), transparent 60%),
+      var(--panel);
     border:1px solid var(--line)}
   .contact-panel h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;letter-spacing:-.02em}
   .contact-panel p{margin:16px auto 0;max-width:54ch;color:var(--ink-soft);font-size:1.1rem}
@@ -192,10 +264,23 @@
     .nav-links{gap:8px}
     .brand-logo{height:26px}
     .nav .btn{padding:7px 11px;font-size:.78rem}
+    .theme-toggle{width:32px;height:32px}
+    .theme-toggle svg{width:15px;height:15px}
     .lang{font-size:.66rem;padding:2px}
     .lang a{padding:4px 6px}
     .contact-panel{padding:48px 18px}
     .contact-panel .btn{font-size:.82rem;padding:12px 16px;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+  }
+  /* Anchos muy estrechos (Fold, SE): el nav lleva un control más desde el tema oscuro */
+  @media (max-width:380px){
+    .wrap{padding:0 12px}
+    .nav-links{gap:5px}
+    .brand-logo{height:21px}
+    .nav .btn{padding:5px 8px;font-size:.68rem}
+    .lang{font-size:.58rem;padding:2px}
+    .lang a{padding:3px 4px}
+    .theme-toggle{width:29px;height:29px}
+    .theme-toggle svg{width:14px;height:14px}
   }
 </style>
 </head>
@@ -205,7 +290,8 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top" aria-label="Inicio de Renovatio Software">
-      <img class="brand-logo" src="../assets/renovatio_horizontal.png" alt="Renovatio Software" />
+      <img class="brand-logo only-light" src="../assets/renovatio_horizontal.png" alt="Renovatio Software" />
+      <img class="brand-logo only-dark" src="../assets/renovatio_horizontal_dark.png" alt="Renovatio Software" />
     </a>
     <nav class="nav-links">
       <a href="#services">Servicios</a>
@@ -217,6 +303,10 @@
         <a href="../en/">EN</a>
         <a class="lang-on" href="./" aria-current="page">ES</a>
       </span>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar a tema oscuro">
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2M20 12h2M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>
+      </button>
       <a class="btn btn-dark cta-nav" href="mailto:proyectos@renovatiosoftware.net">Inicia un proyecto</a>
     </nav>
   </div>
@@ -376,7 +466,8 @@
     <div class="eyebrow">Alianzas</div>
     <div class="alliance-card">
       <div class="alliance-logo">
-        <img src="../assets/ribie-logo.png" alt="RIBIE — Red Iberoamericana de Informática Educativa" loading="lazy" />
+        <img class="only-light" src="../assets/ribie-logo.png" alt="RIBIE — Red Iberoamericana de Informática Educativa" loading="lazy" />
+        <img class="only-dark" src="../assets/ribie-logo-dark.png" alt="RIBIE — Red Iberoamericana de Informática Educativa" loading="lazy" />
       </div>
       <div class="alliance-body">
         <div class="alliance-role">Aliado tecnológico</div>
@@ -445,7 +536,7 @@
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap foot-inner">
-    <span class="brand-sm"><img src="../assets/renovatio_icon.svg" alt="" style="height:18px;width:18px;display:block" />© 2026 Renovatio Software · por <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span>
+    <span class="brand-sm"><img class="only-light" src="../assets/renovatio_icon.svg" alt="" style="height:18px;width:18px" /><img class="only-dark" src="../assets/renovatio_icon_dark.svg" alt="" style="height:18px;width:18px" />© 2026 Renovatio Software · por <a href="https://www.linkedin.com/in/camilo-meneses/" target="_blank" rel="noopener">Camilo Meneses</a></span>
     <a href="privacidad/">Privacidad</a>
     <span>Hecho en Colombia · Construyendo para el mundo</span>
   </div>
@@ -457,6 +548,33 @@
   function block(e){ if(e.target && e.target.tagName === 'IMG'){ e.preventDefault(); return false; } }
   document.addEventListener('contextmenu', block);
   document.addEventListener('dragstart', block);
+})();
+
+/* Tema: el botón guarda la elección; sin elección guardada manda el sistema. */
+(function(){
+  var root = document.documentElement, btn = document.getElementById('themeToggle');
+  if(!btn) return;
+  var media = window.matchMedia('(prefers-color-scheme: dark)');
+  function label(){
+    var dark = root.getAttribute('data-theme') === 'dark';
+    btn.setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+    btn.setAttribute('title', dark ? 'Tema claro' : 'Tema oscuro');
+  }
+  btn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('rs-theme', next); }catch(e){}
+    label();
+  });
+  /* Si nunca tocó el botón, seguir al sistema cuando cambie en caliente. */
+  media.addEventListener('change', function(e){
+    var saved = null;
+    try{ saved = localStorage.getItem('rs-theme'); }catch(err){}
+    if(saved === 'light' || saved === 'dark') return;
+    root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    label();
+  });
+  label();
 })();
 </script>
 </body>
