@@ -140,6 +140,23 @@
   .tag-cat{color:#1d4ed8;background:#eff6ff;border-color:#bfdbfe;font-weight:600}
   @media (max-width:760px){.lines{grid-template-columns:1fr}}
 
+  /* ---------- Alliances ---------- */
+  .alliance{padding:0}
+  .alliance .eyebrow{color:var(--muted);text-align:center;display:block}
+  .alliance-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:38px;margin-top:24px;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 38px;box-shadow:var(--shadow)}
+  .alliance-logo{padding-right:38px;border-right:1px solid var(--line)}
+  .alliance-logo img{width:196px;height:auto;display:block}
+  .alliance-role{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  .alliance-body h3{font-size:1.24rem;font-weight:750;letter-spacing:-.01em;margin-top:9px}
+  .alliance-body p{margin-top:10px;color:var(--ink-soft);font-size:1rem;max-width:60ch}
+  .alliance-body .product-link{margin-top:16px}
+  @media (max-width:760px){
+    .alliance-card{grid-template-columns:1fr;gap:24px;padding:28px}
+    .alliance-logo{padding:0 0 24px;border-right:0;border-bottom:1px solid var(--line)}
+    .alliance-logo img{width:168px}
+  }
+
   /* ---------- Approach ---------- */
   .values{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:20px;text-align:center}
   .value .vdot{width:10px;height:10px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,var(--blue),var(--orange))}
@@ -215,6 +232,7 @@
     <nav class="nav-links">
       <a href="#services">Services</a>
       <a href="#products">Products</a>
+      <a href="#alliances">Alliances</a>
       <a href="#about">About</a>
       <a href="#approach">Approach</a>
       <span class="lang" aria-label="Language">
@@ -371,6 +389,24 @@
       </div>
     </article>
 
+  </div>
+</section>
+
+<!-- ===================== ALLIANCES ===================== -->
+<section class="section alliance" id="alliances">
+  <div class="wrap">
+    <div class="eyebrow">Alliances</div>
+    <div class="alliance-card">
+      <div class="alliance-logo">
+        <img src="../assets/ribie-logo.png" alt="RIBIE — Red Iberoamericana de Informática Educativa" loading="lazy" />
+      </div>
+      <div class="alliance-body">
+        <div class="alliance-role">Technology partner</div>
+        <h3>RIBIE — Red Iberoamericana de Informática Educativa</h3>
+        <p>Technology partner to the network — Colombia-based and active since 1990. Design and development of its institutional site, ribie.org, live since 2026.</p>
+        <a class="product-link" href="https://ribie.org" target="_blank" rel="noopener">Visit ribie.org ↗</a>
+      </div>
+    </div>
   </div>
 </section>
 
